@@ -1,0 +1,3 @@
+com\commons\message\handler\MessageHandler.class
+com\commons\message\handler\EventHandler.class
+com\commons\message\handler\AppEventPublisher.class

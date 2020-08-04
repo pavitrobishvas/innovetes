@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="common-response-handler"/>
+<aop-project name="services-common"/>
+<aop-project name="service-user"/>
+<aop-project name="common-events-model"/>
+</aop-reference-model>

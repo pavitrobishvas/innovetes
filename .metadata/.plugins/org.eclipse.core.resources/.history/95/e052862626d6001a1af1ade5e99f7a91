@@ -1,0 +1,67 @@
+package com.innoventes.user.services.entity;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
+@Entity
+@Table(name = "employee")
+public class EmployeeEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private long id;
+
+	@Column(name = "name")
+	@Length(min = 3)
+	@NotBlank(message = "Name is mandatory")
+	private String name;
+
+	@Column(name = "dateOfBirth")
+	private String dateOfBirth;
+
+	
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private Set<EmployeeAddressEntity> employeeAddress;
+	
+	
+	
+	public EmployeeEntity( EmployeeAddressEntity... employeeAddress) {
+        for(EmployeeAddressEntity employee : employeeAddress) employee.setEmployee(this);
+        this.employeeAddress = Stream.of(employeeAddress).collect(Collectors.toSet());
+    }
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	
+	
+
+}

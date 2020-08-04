@@ -1,0 +1,20 @@
+package com.innoventes.user.services.repository;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.innoventes.user.services.entity.AddressEntity;
+
+
+@Repository
+public interface IAddressRepository extends JpaRepository<AddressEntity, Integer> {
+	
+	@Query("SELECT t FROM AddressEntity t WHERE t.name = ?1")
+	AddressEntity findByName(String eId);
+	
+	@Query("SELECT t FROM AddressEntity t WHERE t.id = ?1")
+	AddressEntity findByById(long id);
+
+}

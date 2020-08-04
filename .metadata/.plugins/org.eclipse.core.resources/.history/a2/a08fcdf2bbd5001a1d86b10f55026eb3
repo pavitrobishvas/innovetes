@@ -1,0 +1,16 @@
+package com.innoventes.user.validations;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author author1
+ * Date : 
+ * EmployeeAddress Data Model class
+ * Defines the  service data validation methods
+ *
+ */
+@Component
+public class EmployeeAddressValidation {
+
+}

@@ -1,0 +1,10 @@
+package com.innoventes.user.service;
+
+import com.ayusha.user.data.models.EmployeeDataModel;
+
+public interface IEmployeeService {
+
+	public ResponseEntity<Map<String, String>> saveAdd(EmployeeDataModel userDataModel) throws DataPersistenceOperationException,InvalidServiceRequestException;
+
+
+}

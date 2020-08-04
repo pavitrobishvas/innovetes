@@ -1,0 +1,12 @@
+package com.innoventes.user.services.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.innoventes.user.services.entity.EmployeeEntity;
+
+public interface IEmployeeRepository extends JpaRepository<EmployeeEntity, Integer>  {
+	
+	@Query("SELECT t FROM EmployeeEntity t WHERE t.name = ?1")
+	EmployeeEntity findByEid(String eId);
+
+}

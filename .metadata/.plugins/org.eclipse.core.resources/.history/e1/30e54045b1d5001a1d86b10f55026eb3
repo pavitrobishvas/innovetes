@@ -1,0 +1,46 @@
+package com.innoventes.user.services.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "employeeAddress")
+public class EmployeeAddressEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private long id;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "employeeAddress_employee", joinColumns = {
+			@JoinColumn(name = "employeeAddress_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "permission_id", referencedColumnName = "id") })
+
+	@Column(name = "addressType")
+	private String addressType;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getAddressType() {
+		return addressType;
+	}
+
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
+	}
+
+}

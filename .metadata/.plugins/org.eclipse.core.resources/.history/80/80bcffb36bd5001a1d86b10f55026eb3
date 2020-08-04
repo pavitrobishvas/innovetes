@@ -1,0 +1,18 @@
+package com.ayusha.user.data.models;
+
+import java.util.Date;
+import java.util.UUID;
+
+
+public class EmployeeDataModel {
+	
+    private long id;
+	
+    /** employee name **/
+	private String name="";
+	
+	/** employee dob **/
+	private String dateOfBirth="";
+	
+
+}

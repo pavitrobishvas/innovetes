@@ -1,0 +1,99 @@
+package com.innoventes.user.services.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ayusha.json.utils.JSONConverter;
+import com.ayusha.services.common.exceptions.DataPersistenceOperationException;
+import com.ayusha.services.common.exceptions.InvalidServiceRequestException;
+import com.ayusha.services.common.exceptions.ResourceNotFoundException;
+import com.ayusha.services.common.exceptions.ServiceRequestProcessor;
+import com.ayusha.user.data.models.EmployeeDataModel;
+import com.custom.logger.logging.Logger;
+import com.custom.logger.manager.LogManager;
+import com.innoventes.user.service.IEmployeeService;
+import com.innoventes.user.services.entity.EmployeeEntity;
+
+/**
+ * This is the service api interface. This controls the access to the services
+ *
+ * @author author1r
+ * @version 1.0
+ * @since 2019-05-03
+ */
+@RestController
+@RequestMapping("/employee")
+@Validated
+public class EmployeeController extends ServiceRequestProcessor {
+
+	/** Logger **/
+	private static Logger LOG = LogManager.getLogger(EmployeeController.class);
+	
+	/** service **/
+	@Autowired
+	private IEmployeeService iEmployeeService;
+	
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addEmp(@Valid @RequestBody EmployeeEntity requestBody, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws  DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException {
+		LOG.info("entered employee notes creation - start");
+		EmployeeDataModel employeeDataModel = null;
+		LOG.info("successfully created  operation ");
+		return JSONConverter.convertPOJOToString(iEmployeeService.saveAdd(requestBody));
+
+	}
+	
+	
+	/**
+	 * get all employee list controller
+	 * 
+	 */
+	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public Page<EmployeeEntity> getAllHr(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException{
+		LOG.info("entered Hr notes updation - start");
+		return iEmployeeService.getAllEmp();
+	}
+	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public Map<String, String> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+		Map<String, String> errors = new HashMap<>();
+
+		ex.getBindingResult().getFieldErrors().forEach(error -> 
+			errors.put(error.getField(), error.getDefaultMessage()));
+		
+		return errors;
+	}
+	
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler(ConstraintViolationException.class)
+	public Map<String, String> handleConstraintViolation(ConstraintViolationException ex) {
+		Map<String, String> errors = new HashMap<>();
+		
+		ex.getConstraintViolations().forEach(cv -> {
+			errors.put("message", cv.getMessage());
+			errors.put("path", (cv.getPropertyPath()).toString());
+		});	
+
+		return errors;
+	}	
+
+}

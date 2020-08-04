@@ -1,0 +1,5 @@
+package com.innoventes.user.services.repository;
+
+public interface IEmployeeRepository  {
+
+}

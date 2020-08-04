@@ -1,0 +1,19 @@
+package com.ayusha.user.data.models;
+
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
+public class AddressDataModel {
+	
+	
+    private long id; 
+	
+	private String addrLineOne;
+	
+	private String addrLineTwo;
+	
+	private String city;
+
+}

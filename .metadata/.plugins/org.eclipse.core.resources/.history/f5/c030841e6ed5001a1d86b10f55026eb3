@@ -1,0 +1,16 @@
+package com.innoventes.user.service;
+
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+
+import com.ayusha.services.common.exceptions.DataPersistenceOperationException;
+import com.ayusha.services.common.exceptions.InvalidServiceRequestException;
+import com.ayusha.user.data.models.EmployeeDataModel;
+
+public interface IEmployeeService {
+
+	public ResponseEntity<Map<String, String>> saveAdd(EmployeeDataModel userDataModel) throws  DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException;
+
+
+}

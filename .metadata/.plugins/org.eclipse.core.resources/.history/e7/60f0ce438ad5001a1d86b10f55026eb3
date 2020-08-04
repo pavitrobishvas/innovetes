@@ -1,0 +1,21 @@
+package com.innoventes.user.services.repository;
+
+import org.apache.tomcat.jni.Address;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.innoventes.user.services.entity.AddressEntity;
+import com.innoventes.user.services.entity.EmployeeEntity;
+
+
+@Repository
+public interface IAddressRepository extends JpaRepository<Address, Integer> {
+	
+	@Query("SELECT t FROM EmployeeEntity t WHERE t.name = ?1")
+	AddressEntity findByName(String eId);
+	
+	@Query("SELECT t FROM EmployeeEntity t WHERE t.id = ?1")
+	AddressEntity findByById(long id);
+
+}

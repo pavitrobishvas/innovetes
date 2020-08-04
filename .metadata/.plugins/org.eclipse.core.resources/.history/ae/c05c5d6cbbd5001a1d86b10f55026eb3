@@ -1,0 +1,15 @@
+package com.ayusha.user.data.models;
+
+
+public class EmployeeAddressDataModel {
+
+	
+	private long id;
+
+    private EmployeeDataModel employee ;
+
+
+    private AddressDataModel address;
+    
+	private String addressType = "";
+}

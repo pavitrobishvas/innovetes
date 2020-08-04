@@ -1,0 +1,26 @@
+package com.ayusha.user.data.models;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+
+import com.innoventes.user.services.entity.AddressEntity;
+import com.innoventes.user.services.entity.EmployeeEntity;
+
+public class EmployeeAddressDataModel {
+
+	
+	private long id;
+
+    private EmployeeDataModel employee;
+
+
+    private AddressDataModel address;
+    
+	private String addressType;
+}

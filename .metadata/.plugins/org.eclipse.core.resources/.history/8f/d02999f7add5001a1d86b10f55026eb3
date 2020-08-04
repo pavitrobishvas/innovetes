@@ -1,0 +1,67 @@
+package com.innoventes.user.services.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "employee_address")
+public class EmployeeAddressEntity {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
+	@Column(name="id")
+    private long id; 
+	
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@JoinColumn(name = "employee_id")
+	private EmployeeEntity employeeEntity;
+	
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@JoinColumn(name = "address_id")
+	private AddressEntity addressEntity;
+	
+	@Column(name = "addressType")
+	private String addressType;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public EmployeeEntity getEmployeeEntity() {
+		return employeeEntity;
+	}
+
+	public void setEmployeeEntity(EmployeeEntity employeeEntity) {
+		this.employeeEntity = employeeEntity;
+	}
+
+	public AddressEntity getAddressEntity() {
+		return addressEntity;
+	}
+
+	public void setAddressEntity(AddressEntity addressEntity) {
+		this.addressEntity = addressEntity;
+	}
+
+	public String getAddressType() {
+		return addressType;
+	}
+
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
+	}
+	
+	
+
+}

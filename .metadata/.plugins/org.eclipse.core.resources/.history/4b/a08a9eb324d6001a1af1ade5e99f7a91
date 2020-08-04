@@ -1,0 +1,80 @@
+package com.innoventes.user.services.entity;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
+@Entity
+@Table(name = "address")
+public class AddressEntity {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
+	@Column(name="id")
+    private long id; 
+	
+	@Column(name = "addrLineOne")
+	@Length(min = 5)
+	@NotBlank(message = "address is mandatory")
+	private String addrLineOne;
+	
+	@Column(name = "addrLineTwo")
+	private String addrLineTwo;
+	
+	@Column(name = "city")
+	@NotBlank(message = "city is mandatory")
+	private String city;
+	
+	
+	@OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
+    private Set<EmployeeAddressEntity> employeeAddress = new HashSet<>();
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getAddrLineOne() {
+		return addrLineOne;
+	}
+
+	public void setAddrLineOne(String addrLineOne) {
+		this.addrLineOne = addrLineOne;
+	}
+
+	public String getAddrLineTwo() {
+		return addrLineTwo;
+	}
+
+	public void setAddrLineTwo(String addrLineTwo) {
+		this.addrLineTwo = addrLineTwo;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+
+
+}

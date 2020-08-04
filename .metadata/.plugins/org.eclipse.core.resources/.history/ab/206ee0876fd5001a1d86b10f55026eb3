@@ -1,0 +1,18 @@
+package com.innoventes.user.service;
+
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
+import com.ayusha.services.common.exceptions.DataPersistenceOperationException;
+import com.ayusha.services.common.exceptions.InvalidServiceRequestException;
+import com.ayusha.services.common.exceptions.ResourceNotFoundException;
+import com.ayusha.user.data.models.EmployeeDataModel;
+
+public interface IEmployeeService {
+
+	public ResponseEntity<Map<String, String>> saveAdd(EmployeeDataModel userDataModel ,MethodArgumentNotValidException ex) throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException;
+
+
+}
